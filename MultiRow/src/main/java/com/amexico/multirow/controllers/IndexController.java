@@ -5,6 +5,9 @@
  */
 package com.amexico.multirow.controllers;
 
+import com.amexico.multirow.models.Conectar;
+import java.util.List;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,12 +18,23 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class IndexController {
-    private static ModelAndView mav =new ModelAndView();;
+    
+    private static ModelAndView mav =new ModelAndView();
+    private JdbcTemplate jdbcTemplate;
+    
+    public IndexController()
+    {
+        Conectar con=new Conectar();
+        this.jdbcTemplate=new JdbcTemplate(con.conectar());
+    }
     
     @RequestMapping(value="/")
     
     public ModelAndView index() {
+         String sql="select * from articulos order by id asc";
+        List datos=this.jdbcTemplate.queryForList(sql);
         mav.setViewName("index");
+        mav.addObject("datos",datos);
         return mav;
     }
 }
