@@ -5,17 +5,25 @@
  */
 package com.amexico.multirow.controllers;
 
+import com.amexico.multirow.models.Articulo;
 import com.amexico.multirow.models.Conectar;
+import com.amexico.multirow.models.ListaArticulos;
+import java.util.Iterator;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
  * @author victorpuchacer
  */
+
 @Controller
 public class IndexController {
     
@@ -28,13 +36,29 @@ public class IndexController {
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
     }
     
-    @RequestMapping(value="/")
-    
-    public ModelAndView index() {
-         String sql="select * from articulos order by id asc";
-        List datos=this.jdbcTemplate.queryForList(sql);
+    @RequestMapping(method=RequestMethod.POST)
+    public ModelAndView select(@ModelAttribute("datos") ListaArticulos datos, HttpServletRequest request){
+        System.out.println("-----------------------");
+        for (Articulo obj : datos.getArticulos()) {
+            /* Cast del Objeto a la Clase Persona*/
+            System.out.println(obj.getNombre());
+        }
+        System.out.println();
+        System.out.println("-----------------------");
         mav.setViewName("index");
         mav.addObject("datos",datos);
+        return mav;
+    }
+    
+    @RequestMapping(value="/", method=RequestMethod.GET)
+    public ModelAndView index() {
+        System.out.println("indexconsult");
+        String sql="select * from articulos order by id asc";
+        List<Articulo> datos=this.jdbcTemplate.query(sql,new BeanPropertyRowMapper<Articulo>(Articulo.class));
+        ListaArticulos articulos = new ListaArticulos();
+        articulos.setArticulos(datos);
+        mav.setViewName("index");
+        mav.addObject("datos",articulos);
         return mav;
     }
 }

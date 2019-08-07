@@ -1,3 +1,4 @@
 com/amexico/multirow/models/Articulo.class
 com/amexico/multirow/controllers/IndexController.class
+com/amexico/multirow/models/ListaArticulos.class
 com/amexico/multirow/models/Conectar.class
