@@ -36,10 +36,11 @@
                     <c:forEach items="${datos.articulos}" var="dato" varStatus="status">
                         <tr>
                             <td><input name="articulos[${status.index}].id" type="hidden" value="<c:out value="${dato.id}" />"></td>
-                            <td><input name="articulos[${status.index}].nombre" type="text" value="<c:out value="${dato.nombre}" />" id="nombre${dato.id}"></td>
-                            <td><input name="articulos[${status.index}].cantidad" type="text" value="<c:out value="${dato.cantidad}" />" id="cantidad${dato.id}"></td>
-                            <td><input name="articulos[${status.index}].changes" type="text" 
-                                       value="<c:out value="${dato.changes}" />" id="changes${dato.id}" onclick="setchanges('${dato.id}')"></td>
+                            <td><input name="articulos[${status.index}].nombre" type="text" value="<c:out 
+                                           value="${dato.nombre}" />" id="nombre${dato.id}" onclick="setchanges('${dato.id}')"></td>
+                            <td><input name="articulos[${status.index}].cantidad" type="text" value="<c:out 
+                                           value="${dato.cantidad}" />" id="cantidad${dato.id}" onclick="setchanges('${dato.id}')"></td>
+                            <td><input name="articulos[${status.index}].changes" type="hidden" value="<c:out value="${dato.changes}" />" id="changes${dato.id}"></td>
                         </tr>
                     </c:forEach>
             </table>

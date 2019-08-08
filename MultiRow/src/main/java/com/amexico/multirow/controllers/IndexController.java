@@ -37,9 +37,15 @@ public class IndexController {
     
     @RequestMapping(method=RequestMethod.POST)
     public ModelAndView select(@ModelAttribute("datos") ListaArticulos datos, HttpServletRequest request){
+        String sql3  = "UPDATE articulos"
+                + " SET cantidad=?,nombre=? where id=?";
         System.out.println("-----------------------");
         for (Articulo obj : datos.getArticulos()) {
             System.out.println(obj.getId()+" "+obj.getNombre()+" "+obj.getCantidad()+" "+obj.getChanges());
+            if(obj.getChanges().equals("1")){
+                System.out.println("updated"+obj.getId());
+                this.jdbcTemplate.update(sql3,obj.getCantidad(),obj.getNombre(),obj.getId());
+            }
         }
         System.out.println("-----------------------");
         mav.setViewName("index");
