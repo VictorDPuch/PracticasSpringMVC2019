@@ -14,6 +14,7 @@ public class Articulo {
     String id;
     String nombre;
     String cantidad;
+    String changes;
 
     public Articulo() {
     }
@@ -46,7 +47,14 @@ public class Articulo {
 
     public void setCantidad(String cantidad) {
         this.cantidad = cantidad;
+    }    
+
+    public String getChanges() {
+        return changes;
     }
-    
+
+    public void setChanges(String changes) {
+        this.changes = changes;
+    }
     
 }

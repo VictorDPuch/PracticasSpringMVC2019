@@ -13,31 +13,29 @@
         <script src="${pdfJs}"></script>
     </head>
     <body>
-        
-        
-         <table >
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>E-Mail</th>
-                            <th>Teléfono</th>
-                            <th>PDF</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${datos}" var="dato">
-                            <tr>
-                                <td><c:out value="${dato.nombre}" /></td>
-                                <td><c:out value="${dato.correo}" /></td>
-                                <td><c:out value="${dato.telefono}" /></td>
-                                <td>
-                                    
-                                    <a onclick="mypdf('${dato.nombre}','${dato.correo}','${dato.telefono}')" ><span class='fas'style="color:red">&#xf1c1;</span></a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
- 
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>E-Mail</th>
+                    <th>Teléfono</th>
+                    <th>PDF</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${datos}" var="dato">
+                    <tr>
+                        <td><c:out value="${dato.nombre}" /></td>
+                        <td><c:out value="${dato.correo}" /></td>
+                        <td><c:out value="${dato.telefono}" /></td>
+                        <td>
+
+                            <a onclick="mypdf('${dato.nombre}', '${dato.correo}', '${dato.telefono}')" ><span class='fas'style="color:red">&#xf1c1;</span></a>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+
     </body>
 </html>
