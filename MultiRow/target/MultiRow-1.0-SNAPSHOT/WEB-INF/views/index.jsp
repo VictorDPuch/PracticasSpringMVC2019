@@ -23,6 +23,7 @@
             <table class="table table-bordered table-striped table-hover">
                 <thead class="thead-dark">
                     <tr>
+                        <th>ID</th>
                         <th>Nombre</th>
                         <th>Cantidad</th>
                     </tr>
@@ -30,7 +31,7 @@
                 <tbody>
                     <c:forEach items="${datos.articulos}" var="dato" varStatus="status">
                         <tr>
-                           <input name="articulos[${status.index}].id" type="hidden" value="<c:out value="${dato.id}" />">
+                           <td><input name="articulos[${status.index}].id" value="<c:out value="${dato.id}" />" readonly="readonly" ></td>
                             <td><input name="articulos[${status.index}].nombre" type="text" value="<c:out 
                                            value="${dato.nombre}" />" id="nombre${dato.id}" onclick="setchanges('${dato.id}')"></td>
                             <td><input name="articulos[${status.index}].cantidad" type="text" value="<c:out 
