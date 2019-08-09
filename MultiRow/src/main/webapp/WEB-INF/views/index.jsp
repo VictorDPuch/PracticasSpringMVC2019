@@ -12,22 +12,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-         <spring:url value="/resources/set.js" var="changesjs" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <spring:url value="/resources/set.js" var="changesjs" />
         <script src="${changesjs}"></script>
-          <link href="<c:url value="/resources/set.js" />" />
-        <script>
-            function setchanges(id){
-     document.getElementById("changes"+id).value = 1;   
-
-}
-        </script>
+        <link href="<c:url value="/resources/set.js" />" />
     </head>
     <body>
+         <div class="container">
         <form:form method="post" modelAttribute="datos" cssClass="form-horizontal">
             <table class="table table-bordered table-striped table-hover">
                 <thead class="thead-dark">
                     <tr>
-                        <th></th>
                         <th>Nombre</th>
                         <th>Cantidad</th>
                     </tr>
@@ -35,16 +30,18 @@
                 <tbody>
                     <c:forEach items="${datos.articulos}" var="dato" varStatus="status">
                         <tr>
-                            <td><input name="articulos[${status.index}].id" type="hidden" value="<c:out value="${dato.id}" />"></td>
+                           <input name="articulos[${status.index}].id" type="hidden" value="<c:out value="${dato.id}" />">
                             <td><input name="articulos[${status.index}].nombre" type="text" value="<c:out 
                                            value="${dato.nombre}" />" id="nombre${dato.id}" onclick="setchanges('${dato.id}')"></td>
                             <td><input name="articulos[${status.index}].cantidad" type="text" value="<c:out 
                                            value="${dato.cantidad}" />" id="cantidad${dato.id}" onclick="setchanges('${dato.id}')"></td>
-                            <td><input name="articulos[${status.index}].changes" type="hidden" value="<c:out value="${dato.changes}" />" id="changes${dato.id}"></td>
+                            <input name="articulos[${status.index}].changes" type="hidden" value="<c:out value="${dato.changes}" />" id="changes${dato.id}">
                         </tr>
                     </c:forEach>
             </table>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Save" class="btn btn-success"/>
+            <input type="button" value="Reset" onclick="window.location.href = '<c:url value="" />';" class="btn btn-danger" />
         </form:form>
+             </div>
     </body>
 </html>

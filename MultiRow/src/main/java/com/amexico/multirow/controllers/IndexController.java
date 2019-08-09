@@ -35,27 +35,23 @@ public class IndexController {
         this.jdbcTemplate=new JdbcTemplate(con.conectar());
     }
     
-    @RequestMapping(method=RequestMethod.POST)
-    public ModelAndView select(@ModelAttribute("datos") ListaArticulos datos, HttpServletRequest request){
-        String sql3  = "UPDATE articulos"
-                + " SET cantidad=?,nombre=? where id=?";
+    @RequestMapping(value="/",method=RequestMethod.POST)
+    public String index(@ModelAttribute("datos") ListaArticulos datos, HttpServletRequest request){
+        String sql  = "UPDATE articulos"+ " SET cantidad=?,nombre=? where id=?";
         System.out.println("-----------------------");
         for (Articulo obj : datos.getArticulos()) {
             System.out.println(obj.getId()+" "+obj.getNombre()+" "+obj.getCantidad()+" "+obj.getChanges());
             if(obj.getChanges().equals("1")){
                 System.out.println("updated"+obj.getId());
-                this.jdbcTemplate.update(sql3,obj.getCantidad(),obj.getNombre(),obj.getId());
+                this.jdbcTemplate.update(sql,obj.getCantidad(),obj.getNombre(),obj.getId());
             }
         }
         System.out.println("-----------------------");
-        mav.setViewName("index");
-        mav.addObject("datos",datos);
-        return mav;
+        return "redirect:/";
     }
     
-    @RequestMapping(value="/", method=RequestMethod.GET)
+    @RequestMapping(value="/")
     public ModelAndView index() {
-        System.out.println("indexconsult");
         String sql="select * from articulos order by id asc";
         List<Articulo> datos=this.jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Articulo.class));
         ListaArticulos articulos = new ListaArticulos();
