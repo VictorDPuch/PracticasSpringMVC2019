@@ -31,7 +31,8 @@
                 <tbody>
                     <c:forEach items="${datos.articulos}" var="dato" varStatus="status">
                         <tr>
-                           <td><input name="articulos[${status.index}].id" value="<c:out value="${dato.id}" />" readonly="readonly" ></td>
+                            <td><c:out value="${status.index+1}" /></td>
+                           <input name="articulos[${status.index}].id" value="<c:out value="${dato.id}" />" hidden >
                             <td><input name="articulos[${status.index}].nombre" type="text" value="<c:out 
                                            value="${dato.nombre}" />" id="nombre${dato.id}" onclick="setchanges('${dato.id}')"></td>
                             <td><input name="articulos[${status.index}].cantidad" type="text" value="<c:out 

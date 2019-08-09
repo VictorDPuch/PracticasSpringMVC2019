@@ -49,7 +49,6 @@ public class IndexController {
         System.out.println("-----------------------");
         return "redirect:/";
     }
-    
     @RequestMapping(value="/")
     public ModelAndView index() {
         String sql="select * from articulos order by id asc";
